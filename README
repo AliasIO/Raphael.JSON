@@ -1,24 +1,37 @@
-<script type="text/javascript" src="raphael-min.js"></script>
-<script type="text/javascript" src="raphael.json.js"></script>
-<script type="text/javascript" src="cycle.js"></script>
+RAPHAEL.JSON
 
-<div id="foo"></div>
+	Convert Raphaël paper objects to JSON and back.
 
-<script type="text/javascript">
-	var paper = Raphael('foo');
 
-	var rect = paper
-		.rect(50, 40, 50, 50)
-		.attr('fill', '#f00')
-		.transform('s2')
-		.rotate(10)
-		;
+DEPENDENCIES
 
-	var json = paper.to_json();
+	* Raphaël: http://raphaeljs.com
+	* Douglas Crockford's cycle.js: https://github.com/douglascrockford/JSON-js
 
-	paper.clear();
 
-	paper2 = Raphael('foo');
+EXAMPLE
 
-	paper2.from_json(json);
-</script>
+	<script type="text/javascript" src="raphael-min.js"></script>
+	<script type="text/javascript" src="raphael.json.js"></script>
+	<script type="text/javascript" src="cycle.js"></script>
+	
+	<div id="foo"></div>
+	
+	<script type="text/javascript">
+		var paper = Raphael('foo');
+	
+		var rect = paper
+			.rect(50, 40, 50, 50)
+			.attr('fill', '#f00')
+			.transform('s2')
+			.rotate(10)
+			;
+	
+		var json = paper.to_json();
+	
+		paper.clear();
+	
+		paper2 = Raphael('foo');
+	
+		paper2.from_json(json);
+	</script>
