@@ -7,35 +7,37 @@
  *
  */
 
-Raphael.fn.to_json = function() {
-	var paper = this;
+(function() {
+	Raphael.fn.toJSON = function() {
+		var paper = this;
 
-	var nodes = new Array;
+		var nodes = new Array;
 
-	for ( var node = paper.bottom; node != null; node = node.next ) {
-		nodes.push({
-			type:      node.type,
-			attrs:     node.attrs,
-			transform: node.matrix.toTransformString(),
-			});
+		for ( var node = paper.bottom; node != null; node = node.next ) {
+			nodes.push({
+				type:      node.type,
+				attrs:     node.attrs,
+				transform: node.matrix.toTransformString(),
+				});
+		}
+
+		return JSON.stringify(nodes);
 	}
 
-	return JSON.stringify(nodes);
-}
+	Raphael.fn.fromJSON = function(json) {
+		var paper = this;
 
-Raphael.fn.from_json = function(json) {
-	var paper = this;
+		if ( json.constructor === String ) {
+			json = JSON.parse(json);
+		}
 
-	if ( json.constructor === String ) {
-		json = JSON.parse(json);
+		json.map(function(node) {
+			var element = paper[node.type]()
+				.attr(node.attrs)
+				.transform(node.transform)
+				;
+
+			paper.set().push(element);
+		});
 	}
-
-	json.map(function(node) {
-		var element = paper[node.type]()
-			.attr(node.attrs)
-			.transform(node.transform)
-			;
-
-		paper.set().push(element);
-	});
-}
+})();
