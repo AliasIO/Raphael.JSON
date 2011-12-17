@@ -1,4 +1,4 @@
-Raphael.JSON
+Raphaël.JSON
 ============
 
 Convert [Raphaël 2.0](http://raphaeljs.com/) elements on a paper to JSON and back.
