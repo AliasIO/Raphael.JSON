@@ -4,7 +4,7 @@ Raphael.JSON
 Convert [Raphaël 2.0](http://raphaeljs.com/) elements on a paper to JSON and back.
 
 This plugin can be used to save the state of a paper for later re-use. It was originally 
-forked from Jonathan Spies's [https://github.com/jspies/raphael.serialize](raphael.serialize)
+forked from Jonathan Spies's [raphael.serialize](https://github.com/jspies/raphael.serialize)
 and later rewritten from scratch to work with Raphaël 2.0.
   
 *Licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).*
