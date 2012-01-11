@@ -7,58 +7,38 @@
  *
  */
 
-// Add support for Array.map() method to IE<9
-if (!Array.prototype.map)
-{
-  Array.prototype.map = function(fun /*, thisp*/)
-  {
-    var len = this.length;
-    if (typeof fun != "function")
-      throw new TypeError();
-
-    var res = new Array(len);
-    var thisp = arguments[1];
-    for (var i = 0; i < len; i++)
-    {
-      if (i in this)
-        res[i] = fun.call(thisp, this[i], i, this);
-    }
-
-    return res;
-  };
-}
-
 (function() {
 	Raphael.fn.toJSON = function() {
 		var paper = this;
 
-		var nodes = new Array;
+		var elements = new Array;
 
-		for ( var node = paper.bottom; node != null; node = node.next ) {
-			nodes.push({
-				type:      node.type,
-				attrs:     node.attrs,
-				transform: node.matrix.toTransformString()
+		for ( var el = paper.bottom; el != null; el = el.next ) {
+			elements.push({
+				id:        el.id,
+				type:      el.type,
+				attrs:     el.attrs,
+				transform: el.matrix.toTransformString()
 				});
 		}
 
-		return JSON.stringify(nodes);
+		return JSON.stringify(elements);
 	}
 
 	Raphael.fn.fromJSON = function(json) {
 		var paper = this;
 
-		if ( json.constructor === String ) {
-			json = JSON.parse(json);
+		if ( typeof json === 'string' ) json = JSON.parse(json);
+
+		for ( var i in json ) {
+			if ( json.hasOwnProperty(i) ) {
+				var element = paper[json[i].type]()
+					.attr(json[i].attrs)
+					.transform(json[i].transform)
+					;
+
+				paper.set().push(element);
+			}
 		}
-
-		json.map(function(node) {
-			var element = paper[node.type]()
-				.attr(node.attrs)
-				.transform(node.transform)
-				;
-
-			paper.set().push(element);
-		});
 	}
 })();

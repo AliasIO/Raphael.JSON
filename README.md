@@ -29,12 +29,12 @@ Example
 		.rotate(10)
 		;
 
-	var json = paper.to_json();
+	var json = paper.toJSON();
 
 	paper.clear();
 
 	paper2 = Raphael('holder');
 
-	paper2.from_json(json);
+	paper2.fromJSON(json);
 </script>
 ```
