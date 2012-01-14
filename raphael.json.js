@@ -15,10 +15,10 @@
 
 		for ( var el = paper.bottom; el != null; el = el.next ) {
 			elements.push({
-				id:        el.id,
 				type:      el.type,
 				attrs:     el.attrs,
 				transform: el.matrix.toTransformString()
+				node:      { id: el.node.id },
 				});
 		}
 
@@ -36,6 +36,8 @@
 					.attr(json[i].attrs)
 					.transform(json[i].transform)
 					;
+
+				element.node.id = json[i].node.id;
 
 				paper.set().push(element);
 			}
