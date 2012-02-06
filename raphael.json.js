@@ -17,7 +17,7 @@
 			elements.push({
 				type:      el.type,
 				attrs:     el.attrs,
-				transform: el.matrix.toTransformString()
+				transform: el.matrix.toTransformString(),
 				node:      { id: el.node.id },
 				});
 		}
