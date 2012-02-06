@@ -18,7 +18,7 @@
 				type:      el.type,
 				attrs:     el.attrs,
 				transform: el.matrix.toTransformString(),
-				node:      { id: el.node.id },
+				node:      { id: el.node.id }
 				});
 		}
 
