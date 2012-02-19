@@ -15,13 +15,13 @@
 
 		for ( var el = paper.bottom; el != null; el = el.next ) {
 
-            if ( filter === "undefined" || filter(el) ) {
-    			elements.push({
-    				type:      el.type,
-    				attrs:     el.attrs,
-    				transform: el.matrix.toTransformString(),
-    				node:      { id: el.node.id }
-    				});
+			if ( filter === "undefined" || filter(el) ) {
+				elements.push({
+					type:      el.type,
+					attrs:     el.attrs,
+					transform: el.matrix.toTransformString(),
+					node:      { id: el.node.id }
+				});
 			}
 		}
 
