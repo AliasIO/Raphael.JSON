@@ -43,7 +43,11 @@
 
 				if ( callback ) el = callback(el, json[i].data);
 
-				if ( el ) paper.set().push(el);
+				if ( el ) {
+					paper.set().push(el);
+				} else {
+					el.remove();
+				}
 			}
 		}
 	}
