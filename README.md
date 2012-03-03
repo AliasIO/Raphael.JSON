@@ -47,12 +47,16 @@ A callback function can be used to save and restore custom attributes.
 ```javascript
 var json = paper.toJSON(function(el, data) {
 	data.id = el.node.id;
+
+	return data;
 });
 ```
 
 ```javascript
 paper.fromJSON(json, function(el, data) {
 	el.node.id = data.id;
+
+	return el;
 });
 ```
 
