@@ -19,7 +19,7 @@
 				data:      data,
 				type:      el.type,
 				attrs:     el.attrs,
-				transform: el.matrix.toTransformString(),
+				transform: el.matrix.toTransformString()
 				});
 		}
 
