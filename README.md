@@ -110,7 +110,6 @@ console.log(exampleSet);
 
 Raphaël.JSON and Raphaël.FreeTransform
 --------------------------------------
---------------------------------------------------------------------------------
 
 Raphaël.JSON can be used together with 
 [Raphaël.FreeTransform](https://github.com/ElbertF/Raphael.FreeTransform) to
