@@ -122,8 +122,6 @@ var json = paper.toJSON(function(el, data) {
 
     if ( el.freeTransform ) {
         data.ft.attrs = el.freeTransform.attrs;
-
-        paper.freeTransform(el).unplug();
     }
 
     return data;
