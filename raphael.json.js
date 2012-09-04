@@ -15,11 +15,11 @@
 		for ( var el = paper.bottom; el != null; el = el.next ) {
 			data = callback ? callback(el, new Object) : new Object;
 
-			elements.push({
+			if ( data ) elements.push({
 				data:      data,
 				type:      el.type,
 				attrs:     el.attrs,
-				transform: el.matrix.toTransformString(),
+				transform: el.matrix.toTransformString()
 				});
 		}
 
