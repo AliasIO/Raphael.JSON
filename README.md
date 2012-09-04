@@ -107,3 +107,43 @@ paper.fromJSON(json, function(el, data) {
 // The set is restored
 console.log(exampleSet);
 ```
+
+Raphaël.JSON and Raphaël.FreeTransform
+--------------------------------------
+--------------------------------------------------------------------------------
+
+Raphaël.JSON can be used together with 
+[Raphaël.FreeTransform](https://github.com/ElbertF/Raphael.FreeTransform) to
+save and load drawings.
+
+```javascript
+// Save
+var json = paper.toJSON(function(el, data) {
+    data.ft = {};
+
+    if ( el.freeTransform ) {
+        paper.freeTransform(el).unplug();
+
+        data.ft.attrs = el.freeTransform.attrs;
+    }
+
+    return data;
+});
+
+// Start over
+paper.clear();
+
+// Load
+paper.fromJSON(json, function(el, data) {
+    if ( data.ft && data.ft.attrs ) {
+        paper.freeTransform(el);
+
+        el.freeTransform.attrs = data.ft.attrs;
+
+        el.freeTransform.apply();
+    }
+
+    return el;
+});
+```
+
