@@ -120,7 +120,7 @@ save and load drawings.
 var json = paper.toJSON(function(el, data) {
     data.ft = {};
 
-    if ( el.freeTransform ) {
+    if ( el.freeTransform != null ) {
         data.ft.attrs = el.freeTransform.attrs;
     }
 
