@@ -19,7 +19,8 @@
 				data:      data,
 				type:      el.type,
 				attrs:     el.attrs,
-				transform: el.matrix.toTransformString()
+				transform: el.matrix.toTransformString(),
+				id:        el.id
 				});
 		}
 
@@ -39,6 +40,7 @@
 				el = paper[json[i].type]()
 					.attr(json[i].attrs)
 					.transform(json[i].transform)
+					.id = json[i].id
 					;
 
 				if ( callback ) el = callback(el, json[i].data);
