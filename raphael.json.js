@@ -39,9 +39,9 @@
 			if ( json.hasOwnProperty(i) ) {
 				el = paper[json[i].type]()
 					.attr(json[i].attrs)
-					.transform(json[i].transform)
-					.id = json[i].id
-					;
+					.transform(json[i].transform);
+
+				el.id = json[i].id;
 
 				if ( callback ) el = callback(el, json[i].data);
 
