@@ -24,7 +24,21 @@
 				});
 		}
 
-		return JSON.stringify(elements);
+		var cache = [];
+		var o = JSON.stringify(elements, function (key, value) {
+		    //http://stackoverflow.com/a/11616993/400048
+		    if (typeof value === 'object' && value !== null) {
+		        if (cache.indexOf(value) !== -1) {
+		            // Circular reference found, discard key
+		            return;
+		        }
+		        // Store value in our collection
+		        cache.push(value);
+		    }
+		    return value;
+		});
+		cache = null;
+		return o;
 	}
 
 	Raphael.fn.fromJSON = function(json, callback) {
