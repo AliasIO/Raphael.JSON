@@ -4,63 +4,64 @@
  *
  */
 
-(function() {
-	Raphael.fn.toJSON = function(callback) {
-		var
-			data,
-			elements = new Array,
-			paper    = this
-			;
+(function () {
+    Raphael.fn.toJSON = function (callback) {
+        var data, elements = new Array, paper = this ;
 
-		for ( var el = paper.bottom; el != null; el = el.next ) {
-			data = callback ? callback(el, new Object) : new Object;
+        for (var el = paper.bottom; el != null; el = el.next) {
+            data = callback ? callback(el, new Object) : new Object;
 
-			if ( data ) elements.push({
-				data:      data,
-				type:      el.type,
-				attrs:     el.attrs,
-				transform: el.matrix.toTransformString(),
-				id:        el.id
-				});
-		}
+            var transformString = null;
+            if (el._ && el._.transform) {
+                transformString = el._.transform.toString();
+            }
 
-		var cache = [];
-		var o = JSON.stringify(elements, function (key, value) {
-		    //http://stackoverflow.com/a/11616993/400048
-		    if (typeof value === 'object' && value !== null) {
-		        if (cache.indexOf(value) !== -1) {
-		            // Circular reference found, discard key
-		            return;
-		        }
-		        // Store value in our collection
-		        cache.push(value);
-		    }
-		    return value;
-		});
-		cache = null;
-		return o;
-	}
+            if (data) elements.push({
+                data: data,
+                type: el.type,
+                attrs: el.attrs,
+//				transform: el.matrix.toTransformString(),
+                transform: transformString,
+                id: el.id
+            });
+        }
 
-	Raphael.fn.fromJSON = function(json, callback) {
-		var
-			el,
-			paper = this
-			;
+        var cache = [];
+        var o = JSON.stringify(elements, function (key, value) {
+            //http://stackoverflow.com/a/11616993/400048
+            if (typeof value === 'object' && value !== null) {
+                if (cache.indexOf(value) !== -1) {
+                    // Circular reference found, discard key
+                    return;
+                }
+                // Store value in our collection
+                cache.push(value);
+            }
+            return value;
+        });
+        cache = null;
+        return o;
+    }
 
-		if ( typeof json === 'string' ) json = JSON.parse(json);
+    Raphael.fn.fromJSON = function (json, callback) {
+        var el, paper = this ;
 
-		for ( var i in json ) {
-			if ( json.hasOwnProperty(i) ) {
-				el = paper[json[i].type]()
-					.attr(json[i].attrs)
-					.transform(json[i].transform);
+        if (typeof json === 'string') json = JSON.parse(json);
 
-				el.id = json[i].id;
+        for (var i in json) {
+            if (json.hasOwnProperty(i)) {
 
-				if ( callback ) el = callback(el, json[i].data);
+                el = paper[json[i].type]().attr(json[i].attrs);
+                if (json[i].transform != null) {
+                    el.transform(json[i].transform);
+                }
 
-				if ( el ) paper.set().push(el);
-			}
-		}
-	}
+//				el.id = json[i].id;
+
+                if (callback) el = callback(el, json[i].data);
+
+//				if ( el ) paper.set().push(el);
+            }
+        }
+    }
 })();
