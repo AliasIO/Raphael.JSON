@@ -11,17 +11,12 @@
         for (var el = paper.bottom; el != null; el = el.next) {
             data = callback ? callback(el, new Object) : new Object;
 
-            var transformString = null;
-            if (el._ && el._.transform) {
-                transformString = el._.transform.toString();
-            }
-
             if (data) elements.push({
                 data: data,
                 type: el.type,
                 attrs: el.attrs,
 //				transform: el.matrix.toTransformString(),
-                transform: transformString,
+                transform: el.transform().toString(),
                 id: el.id
             });
         }
